@@ -39,7 +39,9 @@ function App() {
     formData.append('image', selectedFile);
 
     try {
-      const response = await axios.post('https://parking-production-3f64.up.railway.app/identify-parking', formData, {
+      const backendUrl = process.env.VITE_BACKEND_URL || 'http://localhost:5000';
+      console.log(process.env.VITE_BACKEND_URL)
+      const response = await axios.post(backendUrl+"/identify-parking", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Accept': 'image/jpeg',

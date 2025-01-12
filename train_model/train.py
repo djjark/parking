@@ -11,6 +11,6 @@ if __name__ == '__main__':
     model.train(data='./config.yaml', epochs=5, batch=8, device=0)
 
     # After training or for inference, save the trained model
-    model.save('../model/my_model.pt')
+    model.save('../backend/model/my_model.pt')
 
 

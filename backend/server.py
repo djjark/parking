@@ -1,3 +1,4 @@
+import os
 from flask import Flask, Blueprint
 from routes.identify_parking import identify_parking_bp
 
@@ -8,4 +9,4 @@ app.register_blueprint(identify_parking_bp)
 def hello():
     return "Hello, World!"
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))

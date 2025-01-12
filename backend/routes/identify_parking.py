@@ -5,7 +5,8 @@ import supervision as sv
 from PIL import Image
 from ultralytics import YOLO
 # Load YOLOv8 model
-model_path = os.path.join(os.path.dirname(__file__), '../../model/my_model.pt')
+# model_path = os.path.join(os.path.dirname(__file__), '../../model/my_model.pt')
+model_path = os.path.abspath("../../model")
 # Configure upload folder and allowed extensions
 UPLOAD_FOLDER = "./uploads"
 if not os.path.exists(UPLOAD_FOLDER):

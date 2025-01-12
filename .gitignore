@@ -1,3 +1,4 @@
 datasets/
 train_model/runs*
 backend/uploads/*
+backend/__pycache__/

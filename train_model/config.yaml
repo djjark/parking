@@ -1,0 +1,5 @@
+train: '/mnt/d/Programacao/Estacionamentos/datasets/working/train.txt'
+val: '/mnt/d/Programacao/Estacionamentos/datasets/working/val.txt'
+
+nc: 2  # Number of classes (if you're classifying parking spaces as 'occupied' and 'empty')
+names: ['empty', 'occupied']  # List of class names

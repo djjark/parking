@@ -1,1 +1,3 @@
 datasets/
+train_model/runs*
+backend/uploads/*

@@ -19,5 +19,8 @@ RUN pip install -r requirements.txt  # Install the dependencies
 # Expose port 5000 to the world outside the container
 EXPOSE 5000
 
+# Mount the /server/images directory as a volume
+VOLUME ["/app/uploads"]
+
 # Run the Flask app with Gunicorn (a production-ready web server)
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]

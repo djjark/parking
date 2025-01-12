@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 # Enable CORS for all domains
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:8080"}})
 app = Flask(__name__)
 app.register_blueprint(identify_parking_bp)
 

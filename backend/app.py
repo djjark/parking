@@ -1,7 +1,12 @@
 import os
 from flask import Flask, Blueprint
 from routes.identify_parking import identify_parking_bp
+from flask_cors import CORS
 
+app = Flask(__name__)
+
+# Enable CORS for all domains
+CORS(app)
 app = Flask(__name__)
 app.register_blueprint(identify_parking_bp)
 

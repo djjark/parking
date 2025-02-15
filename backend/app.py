@@ -69,7 +69,8 @@ async def identify_parking(file: UploadFile = File(...)):
         label = f"{detection['class_name']} {detection['confidence']:.2f}"
         cv2.putText(img, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     
-    annotated_image_path = os.path.join(UPLOAD_FOLDER, f"annotated_{filename}")
+    filename = f"annotated_{filename}"
+    annotated_image_path = os.path.join(UPLOAD_FOLDER, filename)
     cv2.imwrite(annotated_image_path, img)
     
     return JSONResponse(content={

@@ -1,26 +1,30 @@
-# Use an official Python runtime as a parent image
+# Use a lightweight Python image
 FROM python:3.11-slim
 
+# Set environment variable to allow running as root
 ENV RAILWAY_RUN_UID=0
 
-RUN apt-get update && \
-    apt-get install -y \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
-# Set the working directory in the container
+
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy only requirements first for better caching
+COPY requirements.txt .
 
 # Install dependencies
-RUN pip install --upgrade pip  # Upgrade pip to avoid issues
-RUN pip install -r requirements.txt  # Install the dependencies
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Expose port 5000 to the world outside the container
-EXPOSE 5000
+# Copy the rest of the application
+COPY . .
 
+# Expose FastAPI port
+EXPOSE 8000
 
-# Run the Flask app with Gunicorn (a production-ready web server)
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+# Run FastAPI app using Uvicorn
+CMD ["uvicorn", "your_script_name:app", "--host", "0.0.0.0", "--port", "8000"]

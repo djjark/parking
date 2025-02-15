@@ -6,6 +6,8 @@ from PIL import Image
 from ultralytics import YOLO
 import numpy as np
 import cv2
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Constants
 UPLOAD_FOLDER = "uploads"
@@ -18,6 +20,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 model = YOLO('yolov8n.pt')
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins (change this in production)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 def allowed_file(filename: str) -> bool:
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

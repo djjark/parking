@@ -32,7 +32,7 @@ COPY --from=build /app/dist .
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose the correct port
-EXPOSE 80
+EXPOSE 81
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

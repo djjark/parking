@@ -4,6 +4,8 @@ services:
   backend:
     build:
       context: ./backend
+    networks:
+      - parking
     ports:
       - "8000:8000"
     volumes:
@@ -16,16 +18,25 @@ services:
     build:
       context: ./frontend
     ports:
-      - "8080:80"
+      - "8080:81"
     depends_on:
       - backend
+    networks:
+      - parking
 
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "81:81"
     volumes:
+      # Mount the Nginx config from the sister directory (relative path)
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - frontend
       - backend
+    networks:
+      - parking
+
+networks:
+  parking:
+    driver: bridge  # Default network driver

@@ -1,6 +1,6 @@
 import os
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from werkzeug.utils import secure_filename
 from PIL import Image
 from ultralytics import YOLO
@@ -73,7 +73,17 @@ async def identify_parking(file: UploadFile = File(...)):
     cv2.imwrite(annotated_image_path, img)
     
     return JSONResponse(content={
+        "annotated_image_url": annotated_image_path,
+        "filename": filename,
         "detections": detections,
-        "annotated_image_url": annotated_image_path
+        
     })
+
+@app.get("/uploads/{filename}")
+def get_upload(filename: str):
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="File not found.")
+    
+    return FileResponse(file_path)
 # test

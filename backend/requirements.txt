@@ -1,7 +1,10 @@
 supervision==0.25.1
-Flask==3.0.0
 ultralytics==8.3.59
 ultralytics-thop==2.0.13
 gunicorn==20.1.0
 contourpy==1.3.0  # (or whatever packages you need)
-flask-cors==4.0.0
+fastapi==0.110.0
+uvicorn==0.29.0
+werkzeug==3.0.1
+opencv-python-headless==4.8.1.78
+pillow==10.1.0

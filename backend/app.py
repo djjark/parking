@@ -17,7 +17,7 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load YOLOv8 model
-model = YOLO('yolov8n.pt')
+model = YOLO('model/my_model.pt')
 
 app = FastAPI()
 app.add_middleware(
